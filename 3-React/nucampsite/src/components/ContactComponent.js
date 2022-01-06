@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {Breadcrumb, BreadcrumbItem,
-    Button, Label, Col, Row } from 'reactstrap';
+import {
+    Breadcrumb, BreadcrumbItem,
+    Button, Label, Col, Row
+} from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const required = val => val && val.length;
@@ -31,7 +33,7 @@ class Contact extends Component {
 
         };
 
-        
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -40,7 +42,7 @@ class Contact extends Component {
         alert("Current state is: " + JSON.stringify(values));
     }
     render() {
-        
+
         return (
             <div className="container">
                 <div className="row">
@@ -74,7 +76,7 @@ class Contact extends Component {
                         <hr />
                     </div>
                     <div className="col-md-10">
-                    <LocalForm onSubmit={values => this.handleSubmit(values)}>
+                        <LocalForm onSubmit={values => this.handleSubmit(values)}>
                             <Row className="form-group">
                                 <Label htmlFor="firstName" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -82,7 +84,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required, 
+                                            required,
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }}
@@ -176,7 +178,7 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{size: 4, offset: 2}}>
+                                <Col md={{ size: 4, offset: 2 }}>
                                     <div className="form-check">
                                         <Label check>
                                             <Control.checkbox
@@ -206,7 +208,7 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{size: 10, offset: 2}}>
+                                <Col md={{ size: 10, offset: 2 }}>
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
