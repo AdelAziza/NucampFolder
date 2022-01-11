@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
+import { Breadcrumb, BreadcrumbItem,
+    Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {
-    Breadcrumb, BreadcrumbItem,
-    Button, Label, Col, Row
-} from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 
 const required = val => val && val.length;
@@ -13,6 +11,7 @@ const isNumber = val => !isNaN(+val);
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Contact extends Component {
+
     constructor(props) {
         super(props);
 
@@ -30,18 +29,16 @@ class Contact extends Component {
                 phoneNum: false,
                 email: false
             }
-
         };
-
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.props.postFeedback(values);
         this.props.resetFeedbackForm();
     }
+
     render() {
 
         return (
@@ -71,6 +68,7 @@ class Contact extends Component {
                         <a role="button" className="btn btn-link" href="mailto:fakeemail@fakeemail.co"><i className="fa fa-envelope-o" /> campsites@nucamp.co</a>
                     </div>
                 </div>
+
                 <div className="row row-content">
                     <div className="col-12">
                         <h2>Send us your Feedback</h2>
@@ -85,7 +83,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required,
+                                            required, 
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }}
@@ -179,7 +177,7 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{ size: 4, offset: 2 }}>
+                                <Col md={{size: 4, offset: 2}}>
                                     <div className="form-check">
                                         <Label check>
                                             <Control.checkbox
@@ -209,7 +207,7 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{ size: 10, offset: 2 }}>
+                                <Col md={{size: 10, offset: 2}}>
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
@@ -220,7 +218,6 @@ class Contact extends Component {
                 </div>
             </div>
         );
-
     }
 }
 

@@ -1,34 +1,61 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components';
 
-//Task 2 : starts here
-function RenderPartner({ partner }) {
+//task one
+function RenderPartner({partner}) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media object src={partner.image} alt={partner.name} width="150px" />
+                <Media object src={baseUrl + partner.image} alt={partner.name} width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading>{partner.name}</Media>
                     {partner.description}
                 </Media>
             </React.Fragment>
-        )
+        );
     }
-    else {
-        <div></div>
-    }
+    return <div />;
 }
 
-function About(props) {
-    //Task 3: starts here
-    const partners = props.partners.map(partner => {
+function PartnerList(props) {
+    const partners = props.partners.partners.map(partner => {
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
+            <Fade in key={partner.id}>
+                <Media tag="li">
+                    <RenderPartner partner={partner} />
+                </Media>
+            </Fade>
+        );
+    });
+
+    if (props.partners.isLoading) {
+        return <Loading />;
+    }
+    if (props.partners.errMess) {
+        return (
+            <div className="col">
+                <h4>{props.partners.errMess}</h4>
+            </div>
+        );
+    }
+    return (
+        <div className="col mt-4">
+            <Media list>
+                <Stagger in>
+                    {partners}
+                </Stagger>
             </Media>
-        )
-    })
+        </div>
+    );
+}
+
+
+function About(props) {
+
     return (
         <div className="container">
             <div className="row">
@@ -70,7 +97,7 @@ function About(props) {
                                 <p className="mb-0">I will not follow where the path may lead, but I will go where there is no path, and I will leave a trail.</p>
                                 <footer className="blockquote-footer">Muriel Strode,{' '}
                                     <cite title="Source Title">"Wind-Wafted Wild Flowers" -
-                                        The Open Court, 1903</cite>
+                                    The Open Court, 1903</cite>
                                 </footer>
                             </blockquote>
                         </CardBody>
@@ -81,11 +108,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>Community Partners</h3>
                 </div>
-                <div className="col mt-4">
-                    <Media list>
-                        {partners}
-                    </Media>
-                </div>
+                <PartnerList partners={props.partners} />
             </div>
         </div>
     );
