@@ -1,8 +1,11 @@
-import React, { Component }  from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
+import React, { Component } from 'react';
+import {
+    Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
     Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label } from 'reactstrap';
+    Form, FormGroup, Input, Label
+} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import Text from 'react-text-typing';
 
 class Header extends Component {
 
@@ -11,8 +14,8 @@ class Header extends Component {
 
         this.toggleNav = this.toggleNav.bind(this);
         this.state = {
-          isNavOpen: false,
-          isModalOpen: false
+            isNavOpen: false,
+            isModalOpen: false
         };
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
@@ -44,8 +47,18 @@ class Header extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <h1>NuCamp</h1>
-                                <h2>a better way to camp</h2>
+                                <Text
+                                    text="NuCamp"
+                                    showBlink={true}
+                                    component="h1"
+                                />
+                                <Text
+                                    text="a better way to camp"
+                                    showBlink={true}
+                                    component="h4"
+                                />
+                                {/* <h1>NuCamp</h1> */}
+                                {/* <h2>a better way to camp</h2> */}
                             </div>
                         </div>
                     </div>
@@ -89,7 +102,7 @@ class Header extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
-                    <Form onSubmit={this.handleLogin}>
+                        <Form onSubmit={this.handleLogin}>
                             <FormGroup>
                                 <Label htmlFor="username">Username</Label>
                                 <Input type="text" id="username" name="username"
